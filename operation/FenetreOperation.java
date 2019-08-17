@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
 import java.util.LinkedList;
 
 import javax.swing.ComboBoxModel;
@@ -78,13 +77,20 @@ public class FenetreOperation extends FenetreCommun{
 	    });
 	    
 		// "Toolbar" pour pouvoir créer des opérations prédéfinies.
-	    GridLayout gl = new GridLayout(1,3);
+	    GridLayout gl = new GridLayout(2,3);
 	    gl.setHgap(5);
 		JPanel tool = new JPanel(gl);
+		// first line
 		tool.add(predefBouton);
 		JLabel label0 = new JLabel("Placement sélectionné :");
 		tool.add(label0);
 		tool.add(comboPlacement);
+		// second line
+		JLabel labelEmpty = new JLabel("");
+		tool.add(labelEmpty);
+		JLabel fixedISIN = new JLabel("ISIN :");
+		tool.add(fixedISIN);
+		JLabel labelISIN = new JLabel("-");
 
 		// Ajout des onglets pour la zone centrale
 		tabbedPane.addTab("Transactions",tabTrans);

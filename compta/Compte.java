@@ -1,39 +1,27 @@
 package gestion.compta;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="comptes")
-public class Compte {
+@AttributeOverrides({
+	@AttributeOverride(name="id", column=@Column(name="id_compte"))
+})
+public class Compte extends SuppObj{
 	private String name;
-	private int id_compte;
 	
 	public Compte(String name){
 		this.name = name;
-		this.id_compte = 0;
+		this.id = 0;
 	}
 	
 	// collection de "getters"
-	@Id
-	@Column(name="id_compte")
-	public int getIdCompte(){
-		return this.id_compte;
-	}
-
 	public String getName(){
 		return this.name;
 	}
 	
 	public void setName(String name){
 		this.name = name;
-	}
-	
-	// ne devrait apparaître que dans CompteDAO.create...
-	public void setIdCompte(int index){
-		this.id_compte = index;
 	}
 	
 	// utilisé pour définir les combos !
@@ -48,7 +36,7 @@ public class Compte {
 		Compte[] vectComptes = new Compte[nbComptes];
 		for (int i = 0; i< nbComptes; i++){
 			vectComptes[i]=new Compte(listeNoms[i]);
-			vectComptes[i].setIdCompte(i+1);
+			vectComptes[i].setId(i+1);
 		}
 		return vectComptes;
 	}

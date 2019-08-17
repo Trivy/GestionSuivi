@@ -1,28 +1,7 @@
 package gestion.data.dao.hibernateDao;
 
-import java.util.List;
 import java.util.Properties;
 
-import org.centenaire.dao.Dao;
-import org.centenaire.dao.abstractDao.AbstractDaoFactory;
-import org.centenaire.dao.abstractDao.AbstractIndividualDao;
-import org.centenaire.dao.abstractDao.AbstractInstitutionDao;
-import org.centenaire.dao.abstractDao.AbstractItemDao;
-import org.centenaire.dao.abstractDao.AbstractLocationDao;
-import org.centenaire.entity.Event;
-import org.centenaire.entity.taglike.Country;
-import org.centenaire.entity.taglike.Departement;
-import org.centenaire.entity.taglike.Discipline;
-import org.centenaire.entity.taglike.InstitStatus;
-import org.centenaire.entity.taglike.InstitutionType;
-import org.centenaire.entity.taglike.LocalType;
-import org.centenaire.entity.taglike.Tag;
-import org.centenaire.entity.taglike.TaxChrono;
-import org.centenaire.entity.taglike.TaxGeo;
-import org.centenaire.entity.taglike.TaxTheme;
-import org.centenaire.entity.typelike.CatEnum;
-import org.centenaire.entity.typelike.EventType;
-import org.centenaire.entity.typelike.ItemType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -31,7 +10,15 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
-public class HibernateDaoFactory extends AbstractDaoFactory {
+import gestion.compta.Compte;
+import gestion.compta.Cours;
+import gestion.compta.Ordre;
+import gestion.compta.Placement;
+import gestion.compta.SourceQuote;
+import gestion.compta.Transaction;
+import gestion.data.Dao;
+
+public class HibernateDaoFactory {
 	// Try using a single 'session' for all transactions
 	// NB: according to Hibernate documentation: "the Hibernate Session wraps a JDBC java.sql.Connection"
 	private Session session;
@@ -74,111 +61,29 @@ public class HibernateDaoFactory extends AbstractDaoFactory {
 		}
 	}
 
-	@Override
-	public AbstractIndividualDao getIndividualDao() {
+	public Dao<Compte> getCompteDao() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public AbstractItemDao getItemDao() {
+	public Dao<Cours> getCoursDao() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public AbstractItemDao getItemDao(List<CatEnum> categories) {
-		// TODO Auto-generated method stub
+	
+	public Dao<Ordre> getOrdreDao(){
 		return null;
 	}
-
-	@Override
-	public Dao<Event> getEventDao() {
-		// TODO Auto-generated method stub
+	
+	public Dao<Placement> getPlacementDao(){
 		return null;
 	}
-
-	@Override
-	public AbstractInstitutionDao getInstitutionDao() {
-		// TODO Auto-generated method stub
+	
+	public Dao<SourceQuote> getSourceQuoteDao(){
 		return null;
 	}
-
-	@Override
-	public AbstractLocationDao getLocationDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<ItemType> getItemTypeDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<EventType> getEventTypeDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<InstitutionType> getInstitTypeDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<Tag> getTagDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<Discipline> getDisciplineDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<InstitStatus> getInstitStatusDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<LocalType> getLocalTypeDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<TaxChrono> getTaxChronoDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<TaxGeo> getTaxGeoDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<TaxTheme> getTaxThemeDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<Departement> getDeptDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dao<Country> getCountryDao() {
-		// TODO Auto-generated method stub
+	
+	public static Dao<Transaction> getTransacDAO(){
 		return null;
 	}
 

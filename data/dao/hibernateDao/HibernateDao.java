@@ -1,62 +1,78 @@
 package gestion.data.dao.hibernateDao;
 
 import java.util.LinkedList;
-import java.util.List;
 
-import org.centenaire.dao.Dao;
-import org.centenaire.entity.Entity;
-import org.centenaire.entity.util.LabelEntity;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
-public class HibernateDao extends Dao<Entity> {
-	Session session;
+import gestion.compta.SuppObj;
 
-	@Override
-	public boolean create(Entity obj) {
-		// TODO Auto-generated method stub
-		return false;
+public class HibernateDao<T extends SuppObj>{
+	private SessionFactory sessionFactory;
+	
+	private final int classIndex;
+	
+	public HibernateDao(SessionFactory sessionFactory, int classIndex) {
+		this.sessionFactory = sessionFactory;
+		this.classIndex = classIndex;
 	}
 
-	@Override
-	public boolean update(Entity obj) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean create(T obj) {
+		Session session = sessionFactory.openSession();
+		
+		session.beginTransaction();
+		session.save(obj);
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return true;
 	}
 
-	@Override
-	public boolean delete(Entity obj) {
-		// TODO Auto-generated method stub
-		return false;
+	
+	public boolean update(T obj) {
+	    Session session = sessionFactory.openSession();
+	    session.beginTransaction();
+	 
+	    session.update(obj);
+	 
+	    session.getTransaction().commit();
+	    session.close();
+	    
+	    return true;
 	}
 
-	@Override
-	public Entity find(int index) {
-		// TODO Auto-generated method stub
+	
+	public boolean delete(T obj) {
+	    Session session = sessionFactory.openSession();
+	    session.beginTransaction();
+	 
+	    session.delete(obj);
+	 
+	    session.getTransaction().commit();
+	    session.close();
+	    
+		return true;
+	}
+	
+	public T find(int index) {
+	    Session session = sessionFactory.openSession();
+	    session.beginTransaction();
+	    
+	    T obj = (T) session.get(SuppObj.getSuppObjClass(classIndex), index);
+	 
+	    session.close();
+		
+		return obj;
+	};
+	
+	// renvoie un élément pleinement initialisé
+	public T newElement() {
 		return null;
-	}
-
-	@Override
-	public LinkedList<Entity> findAll() {
-		// TODO Auto-generated method stub
+	};
+	
+	public LinkedList<T> getData(){
 		return null;
-	}
-
-	@Override
-	public List<LabelEntity> findAllLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getTotalRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Entity> findAll(int startIndex, int endIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	};
 
 }
