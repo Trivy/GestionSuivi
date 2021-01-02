@@ -7,12 +7,14 @@ import javax.persistence.*;
 @AttributeOverrides({
 	@AttributeOverride(name="id", column=@Column(name="id_compte"))
 })
-public class Compte extends SuppObj{
+public class Compte {
 	private String name;
+	private int id_compte;
+
 	
 	public Compte(String name){
 		this.name = name;
-		this.id = 0;
+		this.id_compte = 0;
 	}
 	
 	// collection de "getters"
@@ -22,6 +24,14 @@ public class Compte extends SuppObj{
 	
 	public void setName(String name){
 		this.name = name;
+	}
+	
+	public void setIdCompte(int id) {
+		this.id_compte = id;
+	}
+	
+	public int getIdCompte() {
+		return this.id_compte;
 	}
 	
 	// utilisé pour définir les combos !
@@ -36,7 +46,7 @@ public class Compte extends SuppObj{
 		Compte[] vectComptes = new Compte[nbComptes];
 		for (int i = 0; i< nbComptes; i++){
 			vectComptes[i]=new Compte(listeNoms[i]);
-			vectComptes[i].setId(i+1);
+			vectComptes[i].setIdCompte(i+1);
 		}
 		return vectComptes;
 	}

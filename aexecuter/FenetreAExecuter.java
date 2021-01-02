@@ -26,7 +26,7 @@ private AExecuterModel dModelV;
 		JPanel panAchats = new JPanel(new BorderLayout());
 		JLabel achats = new JLabel("Achats");
 		
-		// Initialiser le mod√®le
+		// Initialiser le mod‡®le
 		Object[][] dataAchats = DataCenter.getInstance().achatsAExecuter();
 		String[] titleAchats = {"Placement", "Volume (UC)", "Cours ordre", "Dernier cours", "Date cours"};
 		dModelA = new AExecuterModel(dataAchats,titleAchats);
@@ -51,23 +51,23 @@ private AExecuterModel dModelV;
 		panVentes.add(ventes,BorderLayout.NORTH);
 		panVentes.add(new JScrollPane(tabVentes), BorderLayout.CENTER);
 		
-		// bouton de mise √† jour 
-		JButton maJ = new JButton("M√†J des donn√©es");
+		// bouton de mise ‡† jour 
+		JButton maJ = new JButton("M‡J des donnÈes");
 	    class AExecListener implements ActionListener{
 			
 			public void actionPerformed(ActionEvent event){
-				// recherche des achats √† ex√©cuter
+				// recherche des achats ‡† ex‡©cuter
 				Object[][] dataA = DataCenter.getInstance().achatsAExecuter();
-				// on utilise setData + fireTableDataChanged() plut√¥t que setDataVector, 
+				// on utilise setData + fireTableDataChanged() plut‡¥t que setDataVector, 
 				// car setDataVector perd les "renderers"
 				dModelA.setData(dataA);
 				dModelA.fireTableDataChanged();
-				System.out.println("AExecListener : mise √† jour des achats √† effectuer termin√©e !");
+				System.out.println("AExecListener : mise ‡† jour des achats ‡† effectuer terminÈe !");
 				
 				Object[][] dataV = DataCenter.getInstance().ventesAExecuter();
 				dModelV.setData(dataV);
 				dModelV.fireTableDataChanged();
-				System.out.println("AExecListener : mise √† jour des ventes √† effectuer termin√©e !");
+				System.out.println("AExecListener : mise ‡† jour des ventes ‡† effectuer terminÈe !");
 			}
 		}
 	    maJ.addActionListener(new AExecListener());

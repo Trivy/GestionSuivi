@@ -44,8 +44,6 @@ public class GestionSuivi {
 	
 	private Color secondColor = Color.lightGray;
 	
-	JComboBox<String> comboG;
-	CardLayout cl;
 	FenetreOperation fenetreOperation;
 	
 	

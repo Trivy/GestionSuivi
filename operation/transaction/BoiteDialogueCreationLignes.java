@@ -58,7 +58,7 @@ public class BoiteDialogueCreationLignes extends JDialog{
 	
 	public BoiteDialogueCreationLignes(final TableauTransaction tabTrans){
 		super();
-		this.tabTrans = tabTransIni;
+		this.tabTrans = tabTrans;
 		this.setTitle("Données transaction prédéfinie");
 		this.setModal(false);
 		this.setSize(600,250);
