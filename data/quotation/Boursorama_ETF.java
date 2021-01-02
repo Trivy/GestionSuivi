@@ -27,10 +27,9 @@ public class Boursorama_ETF extends Transfer {
 		Date date = new Date(0);
 		
         // extraction de la date :
-        int p = text.indexOf("<td>&nbsp;Date</td>");
-        String fromString = "<strong>";
-        int from = text.indexOf(fromString,p);
-        int to = text.indexOf("&nbsp;",from);
+        String fromString = "Valeur liquidative au";
+        int from = text.indexOf(fromString);
+        int to = text.indexOf("/",from);
         
         System.out.println(this.name+".getDate -- from = "+from+", to = "+to);
 
@@ -38,7 +37,7 @@ public class Boursorama_ETF extends Transfer {
         String dateString= text.substring(from + fromString.length(), to);
         
         System.out.println(this.name+".getDate -- dateString ="+dateString);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.FRANCE);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy",Locale.FRANCE);
         try{
         	date = new Date(sdf.parse(dateString).getTime());
 		} catch (IllegalArgumentException e){
@@ -59,15 +58,16 @@ public class Boursorama_ETF extends Transfer {
 	public float getPrice(String text) throws DaoException{
 		float price=0.f;
 		
-		String pString = "<meta itemprop=\"price\" ";
-        int p = text.indexOf(pString);
-        String fromString = "content=\"";
-        int from = text.indexOf(fromString,p);
-        int to = text.indexOf("\" />",from);
+		//String pString = "<meta itemprop=\"price\" ";
+        //int p = text.indexOf(pString);
+        String fromString = "<div class=\"c-ticker__item c-ticker__item--value\">";
+        int from = text.indexOf(fromString);
+        int to = text.indexOf("<span class=\"c-ticker__currency\">",from);
         
         System.out.println(this.name+".getPrice -- from = "+from+", to = "+to);
         // ajout de la taille de fromString dans "from"
-        String priceString= text.substring(from + fromString.length(), to);
+        String rawPriceString= text.substring(from + fromString.length(), to);
+        String priceString = rawPriceString.replace("\n", "").trim();
         
         System.out.println(this.name+".getPrice -- priceString ="+priceString);
 		NumberFormat format = NumberFormat.getInstance(Locale.US);

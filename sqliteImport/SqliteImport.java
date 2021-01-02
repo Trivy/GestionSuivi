@@ -21,6 +21,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class SqliteImport extends JDialog{
 	AbstractImportReader air = new BasicImportReader();
 	String path = "";
+	JPanel lineOnePan;
 	
 	public SqliteImport(){
 		super();
@@ -31,7 +32,7 @@ public class SqliteImport extends JDialog{
 		
 		JLabel fileLabel = new JLabel("Choose file:");
 		JButton fileButton = new JButton("file...");
-		JPanel lineOnePan = new JPanel();
+		lineOnePan = new JPanel();
 		lineOnePan.setLayout(new BoxLayout(lineOnePan, BoxLayout.LINE_AXIS));
 		lineOnePan.add(fileLabel);
 		lineOnePan.add(fileButton);
@@ -55,7 +56,7 @@ public class SqliteImport extends JDialog{
 		JLabel readerLabel = new JLabel("Choose reader:");
 		AbstractImportReader[] airVect = new AbstractImportReader[1];
 		airVect[0] = new BasicImportReader();
-		JComboBox<AbstractImportReader> readerCombo = new JComboBox<AbstractImportReader>(airVect);		
+		final JComboBox<AbstractImportReader> readerCombo = new JComboBox<AbstractImportReader>(airVect);		
 		class ComboListener implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {

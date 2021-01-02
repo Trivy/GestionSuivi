@@ -76,6 +76,8 @@ public class SourceQuote {
 		System.out.println("=== SourceQuote.getCours("+place.toString()+") ===");
 		try{
 	    	URL urlLink = new URL(url + place.getCodeMaJ());
+	    	//System.out.println("==> URL: ");
+	    	//System.out.println(urlLink);
 	        BufferedReader in = new BufferedReader(
 	                new InputStreamReader(urlLink.openStream()));
 	        
@@ -85,6 +87,7 @@ public class SourceQuote {
 	        	text+="\n"+inputLine;
 	        }
 	        System.out.println(">> page web récupérée ");
+	        //System.out.print(text);
 	        cours = new Cours(
 	    	        transf.getDate(text),
 	    	        place,

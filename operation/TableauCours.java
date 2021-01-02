@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -20,7 +19,7 @@ import gestion.util.NormEURRenderer;
 import gestion.util.TableauCommun;
 
 /* 
- * Classe fille de TableauCommun, spÈcialisÈe ‡ Transaction (avec un panneau synthËse)
+ * Classe fille de TableauCommun, sp√©cialis√©e √† Transaction (avec un panneau synth√®se)
  * 
  */
 
@@ -33,10 +32,10 @@ public class TableauCours extends TableauCommun<Cours>{
 		
 		dataSql = DataCenter.getInstance();
 		
-	    //Pour mÈmoire, les titres des colonnes (vrai title dans "CoursModel")
+	    //Pour m√©moire, les titres des colonnes (vrai title dans "CoursModel")
 	    //String  title[] = {"Date", "Cours", "Suppr."};
 	    
-	    // dÈfinition des Èditeurs...
+	    // d√©finition des √©diteurs...
 	    this.tableau.getColumn("Date").setCellEditor(new DateEditor());
 	    
 	    this.tableau.getColumn("Cours").setCellRenderer(new NormEURRenderer());
@@ -45,18 +44,18 @@ public class TableauCours extends TableauCommun<Cours>{
 	    this.tableau.getColumn("Suppr.").setCellRenderer(new ButtonRenderer());
 	    this.tableau.getColumn("Suppr.").setCellEditor(new ButtonDeleteEditor(new JCheckBox()));
 		
-	    // Bouton M‡J des cours
+	    // Bouton M√†J des cours
 	    JButton boutonMaJCours = new JButton("Recherche dernier cours (en ligne)");
 	    boutonMaJCours.addActionListener(new ActionListener(){
 	    	CoursModel model = (CoursModel)tableau.getModel();
 	    	public void actionPerformed(ActionEvent event){
-	    		// appuyer sur le bouton met ‡ jour le placement courant
+	    		// appuyer sur le bouton met √† jour le placement courant
 	    		dataSql.dernierCoursMaJ();
 				model.updateData();
 	    	}
 	    });
 	    
-	    // Panneau de mise ‡ jour des cours en ligne
+	    // Panneau de mise √† jour des cours en ligne
 	    panCours = new JPanel();
 	    //panCours.setLayout(new BoxLayout(panCours, BoxLayout.LINE_AXIS));
 	    panCours.add(boutonMaJCours);

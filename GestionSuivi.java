@@ -44,6 +44,11 @@ public class GestionSuivi {
 	
 	private Color secondColor = Color.lightGray;
 	
+	JComboBox<String> comboG;
+	CardLayout cl;
+	FenetreOperation fenetreOperation;
+	
+	
 	public GestionSuivi(){
 		JFrame fg = new JFrame();
 		content = new JPanel();
@@ -77,7 +82,7 @@ public class GestionSuivi {
 		});
 		
 		// Initialisation de fenetreOperation
-		FenetreOperation fenetreOperation = new FenetreOperation();
+		fenetreOperation = new FenetreOperation();
 		
 		// Création des différentes fenêtres et ajout dans "listFenetre" et "content"
 		listFenetre = new FenetreCommun[4];

@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 
 import gestion.BoutonCompte;
 import gestion.compta.Placement;
@@ -31,6 +32,7 @@ public class FenetreOperation extends FenetreCommun{
 	protected TableauCours tabCours = new TableauCours();
 	protected JButton predefBouton;
 	protected BoutonCompteListener boutonCompteListener = new BoutonCompteListener();
+	JTextField labelISIN;
 
 	public BoutonCompteListener getBoutonCompteListener() {
 		return boutonCompteListener;
@@ -53,13 +55,13 @@ public class FenetreOperation extends FenetreCommun{
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
-		// Combo de sÈlection de placement
+		// Combo de s√©lection de placement
 		LinkedList<Placement> listePlacement = DataCenter.getPlacementDAO().getData();
 		Placement[] vectPlacement = listePlacement.toArray(new Placement[listePlacement.size()]);
 		comboPlacement = new JComboBox<Placement>(vectPlacement);
 		comboPlacement.setPreferredSize(new Dimension(200,30));
 		
-		// Gestion de la sÈlection de la page
+		// Gestion de la s√©lection de la page
 		comboPlacement.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				DataCenter dataCenter = DataCenter.getInstance();
@@ -69,7 +71,7 @@ public class FenetreOperation extends FenetreCommun{
 			}
 		});
 		
-	    predefBouton = new JButton("Achats prÈdÈf.");
+	    predefBouton = new JButton("Achats pr√©d√©f.");
 	    predefBouton.setEnabled(true);
 	    predefBouton.addActionListener(new ActionListener(){
 	      public void actionPerformed(ActionEvent arg0){
@@ -77,15 +79,27 @@ public class FenetreOperation extends FenetreCommun{
 	      }
 	    });
 	    
-		// "Toolbar" pour pouvoir crÈer des opÈrations prÈdÈfinies.
-	    GridLayout gl = new GridLayout(1,3);
+		// "Toolbar" pour pouvoir cr√©er des op√©rations pr√©d√©finies.
+	    GridLayout gl = new GridLayout(2,3);
 	    gl.setHgap(5);
 		JPanel tool = new JPanel(gl);
+		// first line
 		tool.add(predefBouton);
-		JLabel label0 = new JLabel("Placement sÈlectionnÈ :");
+		JLabel label0 = new JLabel("Placement s√©lectionn√© :");
 		tool.add(label0);
 		tool.add(comboPlacement);
-
+		// second line
+		JLabel labelEmpty = new JLabel("");
+		tool.add(labelEmpty);
+		JLabel fixedISIN = new JLabel("ISIN :");
+		tool.add(fixedISIN);
+		// Configuration de labelISIN, similaire √† JLabel
+		labelISIN = new JTextField("-");
+		labelISIN.setEditable(false);
+		labelISIN.setBackground(null);
+		labelISIN.setBorder(null);
+		tool.add(labelISIN);
+		
 		// Ajout des onglets pour la zone centrale
 		tabbedPane.addTab("Transactions",tabTrans);
 		tabbedPane.addTab("Ordres",tabOrdres);
@@ -97,33 +111,38 @@ public class FenetreOperation extends FenetreCommun{
 	}
 	
 	/**
-	 * RedÈfini la mÈthode updateFenetre de FenetreCommun.
+	 * Red√©fini la m√©thode updateFenetre de FenetreCommun.
+	 * 
+	 * Appel√©e en particulier quand le placement courant est modifi√© !
 	 * 
 	 * @see gestion.util.FenetreCommun
 	 */
 	@Override
 	public void updateFenetre(){
-		// OpÈration prÈdÈfinie disponible ou non...
+		// Op√©ration pr√©d√©finie disponible ou non...
 		Placement place = DataCenter.getInstance().getPlaceCourant();
 		
-		// M‡J des donnÈes
+		// M√†J des donn√©es
 		tabTrans.updateTableau();
 		tabOrdres.getModel().updateData();
 		tabCours.getModel().updateData();
 		
-		// M‡J du combo dans tabTrans et tabOrdres
+		// M√†J du combo dans tabTrans et tabOrdres
 		tabTrans.updateCombo();
 		tabOrdres.updateCombo();
 		
-		// M‡J du combo dans FenetreOperation
+		// M√†J du combo dans FenetreOperation
 		updateComboPlacement();
+		
+		// M√†J de l'ISIN du placement courant
+		labelISIN.setText(place.getISIN());
 	}
 	
 	public JComboBox<Placement> getComboPlacement(){
 		return comboPlacement;
 	}
 	
-	// ActionListener pour les boutons de sÈlection de compte
+	// ActionListener pour les boutons de s√©lection de compte
 	class BoutonCompteListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			// First, notify DataCenter to update compteCourants
@@ -135,7 +154,7 @@ public class FenetreOperation extends FenetreCommun{
 		}
 	}
 	
-	// Mise ‡ jour du combo des placements (et de l'entrÈe sÈlectionnÈe)
+	// Mise √† jour du combo des placements (et de l'entr√©e s√©lectionn√©e)
 	public void updateComboPlacement(){
 		
 		DataCenter dataCenter = DataCenter.getInstance();
@@ -151,7 +170,7 @@ public class FenetreOperation extends FenetreCommun{
 			for (int index = 0; index < size ; index++){
 				if (vectPlacement[index].getIndex()== indPlaceCourant){
 					this.comboPlacement.setSelectedIndex(index);
-					System.out.println("== FenetreOperation.updateComboPlacement(), trouvÈ = "+index);
+					System.out.println("== FenetreOperation.updateComboPlacement(), trouv√© = "+index);
 					break;
 				}
 			}
