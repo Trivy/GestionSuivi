@@ -260,6 +260,10 @@ public class DataCenter{
 		System.out.println(output+"]");
 	}
 	
+	/**
+	 * Method used to update *placeCourant*
+	 * @param place
+	 */
 	public void updatePlacement(Placement place){
 		this.placeCourant = place;
 		System.out.println("=== Var. placeCourant ===");

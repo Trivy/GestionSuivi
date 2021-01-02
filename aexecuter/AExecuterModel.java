@@ -15,8 +15,9 @@ public class AExecuterModel extends DefaultTableModel {
 		return false;
 	}
 	
-	public void setData(Object[][] data){
-		this.dataVector = DefaultTableModel.convertToVector(data);
+	public void setData(Object[][] data){		
+		this.setDataVector(DefaultTableModel.convertToVector(data), 
+						   this.columnIdentifiers);
 	}
 
 }

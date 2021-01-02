@@ -7,8 +7,8 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
 /*
- *  Classe responsable de la mise à jour des prix unitaires 
- *  (calculé à partir de l'augmentation de UC et augmentation €)
+ *  Classe responsable de la mise Ã  jour des prix unitaires 
+ *  (calculÃ© Ã  partir de l'augmentation de UC et augmentation â‚¬)
  */
 
 public class ComputationRenderer extends JLabel implements TableCellRenderer {
