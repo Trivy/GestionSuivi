@@ -20,12 +20,16 @@ create database jibapp;
    * When connecting to the database, select "jibapp" and use your chosen username.
    * You land on the "Accueil" page (homepage). Select the page (and the
      associated operations) using the combo at the top center of the page.
-   * To add a new operation on a given fund, go to the "OpÃ©rations et cours" page.
-     Select the relevant fund with the "Placement sÃ©lectionnÃ©" combo (right and slightly below the previous combo).
+   * To add a new operation on a given fund, go to the "Opérations et cours" page.
+     Select the relevant fund with the "Placement sélectionn"" combo (right and slightly below the previous combo).
      You can then create a new transaction with the 'Ajouter une ligne' button
      (bottom left). To create a new order, use the tab 'Ordres'. With the last tab
      'Cours', you can update the value of the investment by providing a Date and a quotation.
    * The "Edition" page enables you to edit the basic properties of objects in the database.
+
+### Exporting a new version of JIBApp
+
+In Eclipse, select `File > Export > Runnable JAR file > Launch config: Gestion - suivi` and choose a suitable name for the resulting JAR. `Package required libraries into generated JAR` is the Library packaging option to prefer.
 
 ### About the structure
 
@@ -44,4 +48,4 @@ The git repository contains only the source codes, so the best option to edit it
 
 ## Licence
 
-All rights reserved Olivier GABRIEL and SoGaR 2018.
+All rights reserved Olivier GABRIEL and SoGaR 2018, 2021.
