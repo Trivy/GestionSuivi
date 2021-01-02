@@ -4,13 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
 import gestion.compta.Compte;
-import gestion.compta.GestionType;
 import gestion.data.Dao;
 import gestion.data.DataCenter;
 

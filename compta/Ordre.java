@@ -1,7 +1,12 @@
 package gestion.compta;
 
-import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="ordres")
 public class Ordre {
 	private int id_ordre;
 	private Placement place;
@@ -27,6 +32,8 @@ public class Ordre {
 		this.note = note;
 	}
 	
+	@Id
+	@Column(name="id_ordre")
 	public int getIdOrdre(){
 		return id_ordre;
 	}

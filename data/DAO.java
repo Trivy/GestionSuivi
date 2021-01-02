@@ -1,12 +1,7 @@
 package gestion.data;
 
 import java.sql.Connection;
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Set;
-
-import gestion.compta.Compte;
-import gestion.compta.Placement;
 
 public abstract class Dao<T>{
 	protected static Connection conn;

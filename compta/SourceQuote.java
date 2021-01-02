@@ -10,6 +10,13 @@ import javax.swing.JOptionPane;
 import gestion.data.dao.DaoException;
 import gestion.data.quotation.Transfer;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="sourcequotes")
 public class SourceQuote {
 	private int id_source;
 	private String name;
@@ -24,6 +31,8 @@ public class SourceQuote {
 		this.transf = transf;
 	}
 
+	@Id
+	@Column(name="id_source")
 	public int getIdSource() {
 		return id_source;
 	}

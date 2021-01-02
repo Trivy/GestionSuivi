@@ -37,6 +37,8 @@ public class GestionSuivi {
 	private JPanel content;
 	private FenetreCommun[] listFenetre;
 	private JPanel panCompte;
+	private JComboBox<String> comboG;
+	private CardLayout cl;
 	
 	private String[] listContent;
 	
@@ -143,7 +145,7 @@ public class GestionSuivi {
 				// Update panCompte
 				updatePanCompte();
 				// Update FenetreOperation
-				fenetreOperation.updateFenetre();	
+				listFenetre[1].updateFenetre();	
 			}
 		}
 		

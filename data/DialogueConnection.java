@@ -17,11 +17,11 @@ import javax.swing.JTextField;
 /**
  * 
  * @author Trivy
- * Classe pour paramétrer la connexion. 
- * Choix parmi prédéfinis ; 
+ * Classe pour paramÃ©trer la connexion. 
+ * Choix parmi prÃ©dÃ©finis ; 
  * _ String host (localhost)
  * _ String dataBase (postgres, JIBApp) 
- * Récupère :
+ * RÃ©cupÃ¨re :
  * _ String user
  * _ String passwd
  */
@@ -29,15 +29,14 @@ import javax.swing.JTextField;
 public class DialogueConnection extends JDialog{
 	private String user, passwd, host, dataBase;
 	private Boolean sendData;
-	JTextField userJtf;
-	JPasswordField passwdJtf;
-	JComboBox<String> hostCombo;
-	JComboBox<String> dbCombo;
-	
+	private JTextField userJtf;
+	private JPasswordField passwdJtf;
+	private JComboBox<String> hostCombo;
+	private JComboBox<String> dbCombo;
 	
 	public DialogueConnection(){
 		super();
-		this.setTitle("Paramétrage de la connexion");
+		this.setTitle("ParamÃ©trage de la connexion");
 		this.setModal(true);
 		this.setSize(400,250);
 		this.setLocationRelativeTo(null);
@@ -45,11 +44,11 @@ public class DialogueConnection extends JDialog{
 		JPanel panChoix = new JPanel();
 		JPanel panControl = new JPanel();
 		
-		// Choix de l'hôte :
-		JLabel hostLabel = new JLabel("Choix de l'hôte :");
+		// Choix de l'hÃ´te :
+		JLabel hostLabel = new JLabel("Choix de l'hÃ´te :");
 		hostCombo = new JComboBox<String>(new String[]{"localhost:5432"});
 		
-		// Choix de la base de données :
+		// Choix de la base de donnÃ©es :
 		JLabel dbLabel = new JLabel("Choix de la base :");
 		dbCombo = new JComboBox<String>(new String[]{"postgres", "jibapp"});
 		
@@ -57,7 +56,7 @@ public class DialogueConnection extends JDialog{
 		JLabel userLabel = new JLabel("Utilisateur :");
 		userJtf = new JTextField("postgres");
 		
-		// entrée mot de passe 
+		// entrÃ©e mot de passe 
 		JLabel passwdLabel = new JLabel("Mot de passe :");
 		passwdJtf = new JPasswordField();
 		
@@ -74,7 +73,7 @@ public class DialogueConnection extends JDialog{
 	    JButton cancelBouton = new JButton("Annuler");
 	    cancelBouton.addActionListener(new ActionListener(){
 	      public void actionPerformed(ActionEvent arg0) {
-	    	// termine le dialogue en arrêtant le programme
+	    	// termine le dialogue en arrÃªtant le programme
 	    	System.exit(ABORT);
 	      }      
 	    });
@@ -82,7 +81,7 @@ public class DialogueConnection extends JDialog{
 	    JButton okBouton = new JButton("OK");
 	    okBouton.addActionListener(new ActionListener(){
 	      public void actionPerformed(ActionEvent arg0){
-	    	  // récupération des infos :
+	    	  // rÃ©cupÃ©ration des infos :
 	    	  user = userJtf.getText();
 	    	  passwd = passwdJtf.getText();
 	    	  host = (String)hostCombo.getSelectedItem();

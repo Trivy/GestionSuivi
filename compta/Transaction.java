@@ -4,6 +4,13 @@ import java.sql.Date;
 
 import gestion.data.DataCenter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="transactions")
 public class Transaction {
 	private int id_trans;
 	private Date date;
@@ -35,6 +42,8 @@ public class Transaction {
 		this.dimEUR = dimEUR;
 	}
 	
+	@Id
+	@Column(name="id_transac")
 	public int getIdTrans(){
 		return id_trans;
 	}

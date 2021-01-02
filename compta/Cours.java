@@ -2,6 +2,13 @@ package gestion.compta;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "cours")
 public class Cours {
 	private int id_cours;
 	private Placement place;
@@ -18,6 +25,8 @@ public class Cours {
 		this.coursUnit = coursUnit;
 	}
 
+	@Id
+	@Column(name="id_cours")
 	public int getIdCours() {
 		return id_cours;
 	}

@@ -21,12 +21,14 @@ public class FenetreAccueil extends FenetreCommun {
 	protected JTable tableauRepartition;
 	protected JLabel achats;
 	protected JLabel ventes;
-	DataCenter dataSql = DataCenter.getInstance();
+	private DataCenter dataSql;
 	
 	public FenetreAccueil(){
 		super();
 
-		// Chercher les donnÈes pour l'accueil :
+		dataSql = DataCenter.getInstance();
+    
+		// Chercher les donn√©es pour l'accueil :
 		Object[][] data = dataSql.accueilData();
 		
 	    //Les titres des colonnes
@@ -41,9 +43,9 @@ public class FenetreAccueil extends FenetreCommun {
 	    this.tableauRepartition.getColumn("%").setCellRenderer(new PercentageRenderer());
 	    
 	    // Panneau des ordres :
-	    JLabel texteAchats = new JLabel("Achats ‡ exÈc. :");
+	    JLabel texteAchats = new JLabel("Achats √† ex√©c. :");
 	    achats = new JLabel(String.valueOf(DataCenter.getNbrAchatsAExec()));
-	    JLabel texteVentes = new JLabel("Ventes ‡ exÈc. :");
+	    JLabel texteVentes = new JLabel("Ventes √† ex√©c. :");
 	    ventes = new JLabel(String.valueOf(DataCenter.getNbrVentesAExec()));
 	    GridLayout gl2 = new GridLayout(1,4);
 	    gl2.setHgap(5);
@@ -53,15 +55,15 @@ public class FenetreAccueil extends FenetreCommun {
 	    panOrdres.add(texteVentes);
 	    panOrdres.add(ventes);	
 	    
-	    // Bouton M‡J et son listener
-		JButton maJ = new JButton("M‡J");
+	    // Bouton M√†J et son listener
+		JButton maJ = new JButton("M√†J");
 	    class MaJListener implements ActionListener{
 			
 			public void actionPerformed(ActionEvent event){
-				// mise ‡ jour du panneau synthËse (sur des donnÈes ‡ jour)
+				// mise √† jour du panneau synth√®se (sur des donn√©es √† jour)
 				((ZModel2) tableauRepartition.getModel()).setDataVector(dataSql.accueilData(),title);
 				
-				// mise ‡ jour des ordres d'achats et de ventes
+				// mise √† jour des ordres d'achats et de ventes
 				updateFenetre();
 			}
 		}
@@ -80,9 +82,9 @@ public class FenetreAccueil extends FenetreCommun {
 //					dataSql.dernierCoursMaJ(place);
 //				}
 				
-				System.out.println("DCoursListener : mise ‡ jour des cours terminÈe !");
+				System.out.println("DCoursListener : mise √† jour des cours termin√©e !");
 				
-				// M‡J des ordres
+				// M√†J des ordres
 				updateFenetre();		
 			}
 		}
@@ -109,7 +111,7 @@ public class FenetreAccueil extends FenetreCommun {
 		BorderLayout bl = new BorderLayout(); 
 		this.setLayout(bl);
 
-		this.add(new JLabel("RÈpartition des sommes :"), BorderLayout.NORTH);
+		this.add(new JLabel("R√©partition des sommes :"), BorderLayout.NORTH);
 		this.add(pan, BorderLayout.CENTER);
 		this.add(panBas,BorderLayout.SOUTH);
 		this.setVisible(true);
@@ -118,7 +120,7 @@ public class FenetreAccueil extends FenetreCommun {
 	@Override
 	public void updateFenetre(){
 		DataCenter dataCenter = DataCenter.getInstance();
-		// Mise ‡ jour du nombre d'ordres ‡ effectuer
+		// Mise √† jour du nombre d'ordres √† effectuer
 		dataCenter.achatsAExecuter();
 		dataCenter.ventesAExecuter();
 		this.achats.setText(String.valueOf(DataCenter.getNbrAchatsAExec()));

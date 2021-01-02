@@ -1,8 +1,14 @@
 package gestion.compta;
 
-import gestion.data.DataCenter;
-import gestion.data.dao.SourceQuoteDAO;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import gestion.data.DataCenter;
+
+@Entity
+@Table(name="placements")
 public class Placement {
 	private String name;
 	private String mnemo;
@@ -43,6 +49,8 @@ public class Placement {
 		return this.codeMaJ;
 	}
 	
+	@Id
+	@Column(name="id_placement")
 	public int getIndex(){
 		return this.index;
 	}

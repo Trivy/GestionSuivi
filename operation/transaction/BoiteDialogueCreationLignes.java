@@ -5,16 +5,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.HashSet;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 import gestion.compta.Compte;
@@ -27,9 +24,9 @@ import gestion.util.ZModel;
 /**
  * 
  * @author Trivy
- * Classe pour la création de nouvelles lignes (sur répartition prédéfinie).
+ * Classe pour la crÃ©ation de nouvelles lignes (sur rÃ©partition prÃ©dÃ©finie).
  * 
- * Les nouvelles lignes à créer sont réparties sur plusieurs placements différents.
+ * Les nouvelles lignes Ã  crÃ©er sont rÃ©parties sur plusieurs placements diffÃ©rents.
  * 
  */
 
@@ -61,8 +58,8 @@ public class BoiteDialogueCreationLignes extends JDialog{
 	
 	public BoiteDialogueCreationLignes(final TableauTransaction tabTrans){
 		super();
-		this.tabTrans = tabTrans;
-		this.setTitle("Données transaction prédéfinie");
+		this.tabTrans = tabTransIni;
+		this.setTitle("DonnÃ©es transaction prÃ©dÃ©finie");
 		this.setModal(false);
 		this.setSize(600,250);
 		this.setLocationRelativeTo(null);
@@ -88,11 +85,11 @@ public class BoiteDialogueCreationLignes extends JDialog{
 		// Compte's name
 		JLabel compteLabel = new JLabel("Compte", SwingConstants.CENTER);
 		
-		// entrée nbr UC
-		// + formatage des nombres à 4 décimales...
+		// entrÃ©e nbr UC
+		// + formatage des nombres Ã  4 dÃ©cimales...
 		JLabel totUCLabel = new JLabel("Nbr tot. UC", SwingConstants.CENTER);
 		
-		// entrée cours 
+		// entrÃ©e cours 
 		JLabel coursLabel = new JLabel("Cours", SwingConstants.CENTER);
 		
 		// Formatting label Panel
@@ -141,7 +138,7 @@ public class BoiteDialogueCreationLignes extends JDialog{
 	    		  	float cours = inputRow.getCours();
 	    		  	float nbrUC = inputRow.getNbrUC();
 
-					// ajoute la première ligne au tableau (attention ! Pas initialisée !)
+					// ajoute la premiÃ¨re ligne au tableau (attention ! Pas initialisÃ©e !)
 					Transaction trans = new Transaction(
 							ZModel.convertStringToDate(jtfDate.getText()),
 							place,

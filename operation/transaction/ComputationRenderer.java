@@ -7,8 +7,8 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
 /*
- *  Classe responsable de la mise à jour des prix unitaires 
- *  (calculé à partir de l'augmentation de UC et augmentation €)
+ *  Classe responsable de la mise Ã  jour des prix unitaires 
+ *  (calculÃ© Ã  partir de l'augmentation de UC et augmentation â‚¬)
  */
 
 public class ComputationRenderer extends JLabel implements TableCellRenderer {
@@ -17,7 +17,9 @@ public class ComputationRenderer extends JLabel implements TableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean isFocus, int row,
 			int column) {
 		try {
-			float updatedVal= (((Float)table.getModel().getValueAt(row, (column+3))-(Float)table.getModel().getValueAt(row, (column+4))))/((Float)table.getModel().getValueAt(row, (column+1))-(Float)table.getModel().getValueAt(row, (column+2)));
+			float dividend = (Float)table.getModel().getValueAt(row, (column+3))-(Float)table.getModel().getValueAt(row, (column+4));
+			float divisor = (Float)table.getModel().getValueAt(row, (column+1))-(Float)table.getModel().getValueAt(row, (column+2));
+			float updatedVal= dividend/divisor;
 			table.setValueAt(updatedVal, row, column);
 			this.setText(String.format("%.2f",updatedVal));
 		} catch (ArithmeticException e){

@@ -1,5 +1,12 @@
 package gestion.compta;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="comptes")
 public class Compte {
 	private String name;
 	private int id_compte;
@@ -10,7 +17,8 @@ public class Compte {
 	}
 	
 	// collection de "getters"
-	
+	@Id
+	@Column(name="id_compte")
 	public int getIdCompte(){
 		return this.id_compte;
 	}

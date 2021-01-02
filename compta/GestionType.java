@@ -1,5 +1,12 @@
 package gestion.compta;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="types")
 public class GestionType {
 	private String name;
 	private int id_type;
@@ -9,6 +16,8 @@ public class GestionType {
 		this.name = name;
 	}
 	
+	@Id
+	@Column(name="id_type")
 	public int getIdType(){
 		return id_type;
 	}
