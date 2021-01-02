@@ -1,8 +1,5 @@
 package gestion.aexecuter;
 
-import java.util.Arrays;
-import java.util.Vector;
-
 import javax.swing.table.DefaultTableModel;
 
 public class AExecuterModel extends DefaultTableModel {
@@ -15,7 +12,7 @@ public class AExecuterModel extends DefaultTableModel {
 		return false;
 	}
 	
-	public void setData(Object[][] data){		
+	public void setData(Object[][] data){
 		this.setDataVector(DefaultTableModel.convertToVector(data), 
 						   this.columnIdentifiers);
 	}

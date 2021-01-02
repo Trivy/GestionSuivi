@@ -25,12 +25,12 @@ public class Boursorama extends Transfer {
 	@Override
 	public Date getDate(String text) throws DaoException{
 		Date date = new Date(0);
-		
+   
         // extraction de la date :
-        int p = text.indexOf("<td>&nbsp;Date</td>");
-        String fromString = "<strong>";
+        int p = text.indexOf("c-faceplate__real-time");
+        String fromString = "dernier cours connu au ";
         int from = text.indexOf(fromString,p);
-        int to = text.indexOf("&nbsp;",from);
+        int to = text.indexOf("</div>",from);
         
         System.out.println(this.name+".getDate -- from = "+from+", to = "+to);
 
@@ -59,11 +59,11 @@ public class Boursorama extends Transfer {
 	public float getPrice(String text) throws DaoException{
 		float price=0.f;
 		
-		String pString = "<meta itemprop=\"price\" ";
+		String pString = "<div class=\"c-faceplate__price c-faceplate__price--inline\"><span class=\"c-instrument c-instrument--last\"";
         int p = text.indexOf(pString);
-        String fromString = "content=\"";
+        String fromString = "data-ist-last>";
         int from = text.indexOf(fromString,p);
-        int to = text.indexOf("\" />",from);
+        int to = text.indexOf("</span><span class=\"c-faceplate",from);
         
         System.out.println(this.name+".getPrice -- from = "+from+", to = "+to);
         // ajout de la taille de fromString dans "from"
@@ -72,17 +72,19 @@ public class Boursorama extends Transfer {
         System.out.println(this.name+".getPrice -- priceString ="+priceString);
 		NumberFormat format = NumberFormat.getInstance(Locale.US);
         try{
+        	// remove white spaces
+        	priceString = priceString.replaceAll("\\s+", "");
         	price = format.parse((String)priceString).floatValue();
         	System.out.println("Prix récupéré = "+price);
 		} catch (IllegalArgumentException e){
 			e.printStackTrace();
-			JOptionPane jop = new JOptionPane();
-			jop.showMessageDialog(null, "priceString de la mauvaise forme ? "+e.getMessage(),"ERREUR ds "+this.name+".getPrice",JOptionPane.ERROR_MESSAGE);
+			//JOptionPane jop = new JOptionPane();
+			//jop.showMessageDialog(null, "priceString de la mauvaise forme ? "+e.getMessage(),"ERREUR ds "+this.name+".getPrice",JOptionPane.ERROR_MESSAGE);
 			throw new DaoException();
 		} catch (Exception e){
 			e.printStackTrace();
-			JOptionPane jop = new JOptionPane();
-			jop.showMessageDialog(null, e.getMessage(),"ERREUR ds "+this.name+".getPrice",JOptionPane.ERROR_MESSAGE);
+			//JOptionPane jop = new JOptionPane();
+			//jop.showMessageDialog(null, e.getMessage(),"ERREUR dans "+this.name+".getPrice",JOptionPane.ERROR_MESSAGE);
 			throw new DaoException();
 		}
         return price;
