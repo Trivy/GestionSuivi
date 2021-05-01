@@ -20,8 +20,13 @@ public class CoursDAO extends Dao<Cours> {
 		super(dataCenter);
 	}
 
-	public boolean create(Cours obj){
-		try{
+	/**
+	 * Create new object 'Cours'
+	 * 
+	 * NB: no check for duplicate!
+	 */
+	 public boolean create(Cours obj){
+		try{					
 			String query="INSERT INTO cours(id_placement,cours_date,coursunit)";
 			query+="VALUES(?,?,?)";
 			PreparedStatement state = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -108,6 +113,37 @@ public class CoursDAO extends Dao<Cours> {
 					res.getFloat("coursunit")
 					);
 			cours.setIdCours(index);
+			state.close();
+			return cours;
+		} catch (SQLException e){
+			e.printStackTrace();
+			JOptionPane jop = new JOptionPane();
+			jop.showMessageDialog(null, e.getMessage(),"ERREUR dans CoursDAO.find !",JOptionPane.ERROR_MESSAGE);
+			return null;
+		} catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	};
+	
+	public Cours find(Date date, Placement placement){
+		try{
+			String query="SELECT id_cours, cours_date, coursunit "
+					+ " FROM cours WHERE cours_date = ? AND id_placement = ? ORDER BY id_cours DESC ";
+			PreparedStatement state = conn.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			state.setDate(1, date);
+			state.setInt(2, placement.getIndex());
+			ResultSet res = state.executeQuery();
+			if (!res.first()) {
+				System.out.println("CoursDAO.find -- No result found! Returning null");
+				return null;
+			};
+			Cours cours = new Cours(
+					res.getDate("cours_date"),
+					placement,
+					res.getFloat("coursunit")
+					);
+			cours.setIdCours(res.getInt("id_cours"));
 			state.close();
 			return cours;
 		} catch (SQLException e){

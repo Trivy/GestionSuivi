@@ -48,7 +48,13 @@ public class BoiteDialogueCreationLignes extends JDialog{
 			dataCenter.getPlacementDAO().find(33),
 			
 			// corresponds to LYXOR UCITS ETF EUROMTS 3-5Y IG
-			dataCenter.getPlacementDAO().find(37)
+			dataCenter.getPlacementDAO().find(37),
+			
+			// corresponds to OPCI SOFIDY PIERRE EUROPE A
+			dataCenter.getPlacementDAO().find(44),
+			
+			// corresponds to OPCI SWISSLIFE DYNAPIERRE P
+			dataCenter.getPlacementDAO().find(45)
 		};
 	// The predefined transaction only involves "AV - Epargnissimo"...
 	private Compte currentCompte = dataCenter.getCompteDAO().find(1);
@@ -132,26 +138,29 @@ public class BoiteDialogueCreationLignes extends JDialog{
 	    	  
 	    	  // For each inputRow...
 	    	  for (InputRow inputRow: activeRows) {
-	    		  	// 1 - create a suitable transaction...
-	    		  
+	    		  	// 0 - recover potential transaction data
 	    		  	Placement place = inputRow.getPlacement();
 	    		  	float cours = inputRow.getCours();
 	    		  	float nbrUC = inputRow.getNbrUC();
 
-					// ajoute la première ligne au tableau (attention ! Pas initialisée !)
-					Transaction trans = new Transaction(
-							ZModel.convertStringToDate(jtfDate.getText()),
-							place,
-							dataCenter.getCompteDAO().find(1),
-							cours,
-							nbrUC, 
-							new Float(0), 
-							nbrUC*cours,
-							new Float(0)
-					);
-					
-					// 2 - include this transaction in the table
-					dataCenter.getTransacDAO().create(trans);
+	    		  	// act only if nonzero number of UC
+	    		  	if (nbrUC != 0) {
+		    		  	// 1 - create a suitable transaction...
+						// ajoute la première ligne au tableau (attention ! Pas initialisée !)
+						Transaction trans = new Transaction(
+								ZModel.convertStringToDate(jtfDate.getText()),
+								place,
+								dataCenter.getCompteDAO().find(1),
+								cours,
+								nbrUC, 
+								new Float(0), 
+								nbrUC*cours,
+								new Float(0)
+						);
+						
+						// 2 - include this transaction in the table
+						dataCenter.getTransacDAO().create(trans);	
+	    		  	}
 	    	 }
 	    	 // after including the new data, update tabTrans     	
 	    	 tabTrans.updateTableau();

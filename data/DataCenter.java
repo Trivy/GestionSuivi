@@ -112,13 +112,8 @@ public class DataCenter{
 	public void dernierCoursMaJ(){
 		// pour prendre en compte les dernières modif. de source, en particulier.
 		Placement place = this.getPlacementDAO().find(this.getPlaceCourant().getIndex());
-		try {
-			Cours cours = place.getSource().getCours(place);
-			this.getCoursDAO().create(cours);
-		} catch (DaoException e){
-			System.err.println("Erreur dans DataCenter.dernierCoursMaJ()");
-			System.err.println("dernierCoursMaJ() : pas de cours créé pour "+place.getName());
-		}
+		
+		this.dernierCoursMaJ(place);
 	}
 	
 	public void dernierCoursMaJ(Placement place){
@@ -126,6 +121,15 @@ public class DataCenter{
 		// on suppose que le placement considéré est à jour !
 		try {
 			Cours cours = place.getSource().getCours(place);
+			
+			// Look for potential duplicates
+			Cours previous = this.getCoursDAO().find(cours.getDate(), place);
+			if ((previous != null) && (cours.getCoursUnit() == previous.getCoursUnit())) {
+				System.out.println("DataCenter.dernierCoursMaJ-- pas d'insertion pour éviter une duplication.");
+				return;
+			}
+			
+			// Insert new 'Cours'
 			this.getCoursDAO().create(cours);
 		} catch (DaoException e){
 			System.err.println("Erreur dans DataCenter.dernierCoursMaJ()");

@@ -7,6 +7,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import java.lang.NullPointerException;
+
 import gestion.compta.Compte;
 import gestion.compta.Placement;
 
@@ -44,7 +46,14 @@ public class InputRow extends JPanel {
 	};
 	
 	public float getCours() {
-    	float cours = ((Number)jftfCours.getValue()).floatValue();
+		float cours;
+		
+		try {
+	    	cours = ((Number)jftfCours.getValue()).floatValue();			
+		} 
+		catch (NullPointerException e) {
+			cours = 0;
+		}
     	
     	return cours;
 	}
