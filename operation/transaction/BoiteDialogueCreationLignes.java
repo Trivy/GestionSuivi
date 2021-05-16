@@ -38,17 +38,17 @@ public class BoiteDialogueCreationLignes extends JDialog{
 			// corresponds to Carmignac Emergents
 			dataCenter.getPlacementDAO().find(4),
 			
-			// corresponds to LYXOR ETF DJ INDUSTRIAL AVERAGE 
-			dataCenter.getPlacementDAO().find(32),
+			// corresponds to Ecofi Enjeux futurs C 
+			dataCenter.getPlacementDAO().find(46),
 			
-			// corresponds to LYXOR INDEX FUND EURO
-			dataCenter.getPlacementDAO().find(27),
+			// corresponds to Ecofi trajectoires durables
+			dataCenter.getPlacementDAO().find(47),
+			
+			// corresponds to Ecofi Epargne Ethique obligations C
+			dataCenter.getPlacementDAO().find(48),
 			
 			// corresponds to LYXOR JAPAN TOPIX ETF DLY HDG D 
 			dataCenter.getPlacementDAO().find(33),
-			
-			// corresponds to LYXOR UCITS ETF EUROMTS 3-5Y IG
-			dataCenter.getPlacementDAO().find(37),
 			
 			// corresponds to OPCI SOFIDY PIERRE EUROPE A
 			dataCenter.getPlacementDAO().find(44),
@@ -65,7 +65,7 @@ public class BoiteDialogueCreationLignes extends JDialog{
 	public BoiteDialogueCreationLignes(final TableauTransaction tabTrans){
 		super();
 		this.tabTrans = tabTrans;
-		this.setTitle("DonnÃ©es transaction prÃ©dÃ©finie");
+		this.setTitle("Données transaction prédéfinie");
 		this.setModal(false);
 		this.setSize(600,250);
 		this.setLocationRelativeTo(null);
@@ -91,11 +91,11 @@ public class BoiteDialogueCreationLignes extends JDialog{
 		// Compte's name
 		JLabel compteLabel = new JLabel("Compte", SwingConstants.CENTER);
 		
-		// entrÃ©e nbr UC
-		// + formatage des nombres Ã  4 dÃ©cimales...
+		// entrée nbr UC
+		// + formatage des nombres à  4 décimales...
 		JLabel totUCLabel = new JLabel("Nbr tot. UC", SwingConstants.CENTER);
 		
-		// entrÃ©e cours 
+		// entrée cours 
 		JLabel coursLabel = new JLabel("Cours", SwingConstants.CENTER);
 		
 		// Formatting label Panel
